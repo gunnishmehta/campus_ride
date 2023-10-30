@@ -1,0 +1,67 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url("Group 4453naa.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-color: #f2f6fc;
+    color: white;
+}
+
+.navbar {
+    background-color: #333;
+    padding: 10px;
+}
+
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.payment-options {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border: 2px solid #eee;
+    border-radius: 20px;
+    color: white;
+    margin: 10px;
+}
+
+.payment-options h2 {
+    margin-bottom: 30px;
+    padding: 5px;
+    font-size: 24px;
+}
+
+.payment-options ul {
+    list-style: none;
+    padding: 0;
+}
+
+.payment-options li {
+    margin: 50px 0;
+    font-size: 18px;
+}
+
+.payment-options a {
+    text-decoration: none;
+    color: white;
+    background: #25b636;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 20px;
+    /* Added margin for spacing */
+}
+
+.payment-options a:hover {
+    background: #acc9f7;
+}

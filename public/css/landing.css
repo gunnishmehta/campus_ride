@@ -1,0 +1,42 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.text-body,
+.link-danger {
+    color: white;
+}
+
+.form-check input[type="checkbox"]+.form-check-label a {
+    color: white;
+}
+
+.divider {
+    margin: 20px 0;
+}
+
+
+body {
+    background-image: url("Group 4453naa.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 10vh;
+}
+
+.btn-primary btn-lg {
+    display: block;
+    margin: 20px auto;
+    margin-top: 50px;
+    /* Adjust the value as needed */
+}
