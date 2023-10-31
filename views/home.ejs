@@ -66,37 +66,11 @@
     </div>
   </div>
 
-  <script>
-    // Show the price selector when a location is selected
-    document.getElementById("location-selector").addEventListener("change", function () {
-      var priceSelector = document.querySelector(".price-selector");
-      if (this.value === "") {
-        priceSelector.style.display = "none";
-      } else {
-        priceSelector.style.display = "block";
-      }
-    });
-  </script>
+  
   <div class="availability-button" style="display: none;">
     <a href="/availability" class="btn btn-primary">Check Availability</a>
   </div>
-  <script>
-    // Show the availability button when location and price are selected
-    var locationSelector = document.getElementById("location-selector");
-    var priceSelector = document.getElementById("price-per-hour-selector");
-    var availabilityButton = document.querySelector(".availability-button");
-
-    locationSelector.addEventListener("change", checkSelectors);
-    priceSelector.addEventListener("change", checkSelectors);
-
-    function checkSelectors() {
-      if (locationSelector.value && priceSelector.value) {
-        availabilityButton.style.display = "block";
-      } else {
-        availabilityButton.style.display = "none";
-      }
-    }
-  </script>
+  
 </body>
 
 </html>
