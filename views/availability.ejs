@@ -38,69 +38,25 @@
 
     <!-- Availability Check Section -->
     <div class="availability-section">
-        <h1 style="color: rgba(0, 255, 255, 0.675);">Check Cycle Availability</h1>
-        <form id="availability-form">
+        <h1 style="color: rgba(0, 60, 255, 0.667);">Check Cycle Availability</h1>
+        <form id="availability-form" action="/availability" method="post">
             <input type="text" id="cycle-code" placeholder="Enter Cycle Code" required>
-            <button type="button" id="check-button">Check Availability</button>
+            <button type="submit" id="check-button">Check Availability</button>
         </form>
-        <div class="availability-result" id="available-result">
-            <p style="color: aquamarine;">Cycle is available!</p>
+
+        <!-- <div class="availability-result" id="available-result">
+            <p style="color: rgba(0, 60, 255, 0.667);">Cycle is available!</p>
             <button id="book-button" onclick="window.location.href = '/payment';">Book Now</button>
         </div>
 
         <div class="availability-result" id="unavailable-result">
-            <p style="color: rgba(0, 255, 255, 0.667);">Sorry, no rides are available with this code.</p>
-        </div>
+            <p style="color: rgba(0, 60, 255, 0.667);">Sorry, no rides are available with this code.</p>
+        </div> -->
     </div>
 
 </body>
 
-</html>availability.css">
-    <meta charset="UTF-8">
-    <title>Check Availability</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
 
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #333; padding: 10px;">
-        <a class="navbar-brand" href="/login" style="color: white; margin-left: 10px;">CampusRide</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/" style="color: white;">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/location" style="color: white;">Locations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#cta" style="color: white;">About & Contact Us</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Availability Check Section -->
-    <div class="availability-section">
-        <h1 style="color: rgba(0, 255, 255, 0.675);">Check Cycle Availability</h1>
-        <form id="availability-form">
-            <input type="text" id="cycle-code" placeholder="Enter Cycle Code" required>
-            <button type="button" id="check-button">Check Availability</button>
-        </form>
-        <div class="availability-result" id="available-result">
-            <p style="color: aquamarine;">Cycle is available!</p>
-            <button id="book-button" onclick="window.location.href = '/payment';">Book Now</button>
-        </div>
-
-        <div class="availability-result" id="unavailable-result">
-            <p style="color: rgba(0, 255, 255, 0.667);">Sorry, no rides are available with this code.</p>
-        </div>
-    </div>
 
 </body>
 
