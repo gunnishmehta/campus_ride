@@ -33,33 +33,38 @@
   </nav>
 
   <div class="form-container">
-    <form>
+    <form action="/register" method="post">
       <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
         <p class="lead fw-normal mb-0 me-4">Sign-Up</p>
       </div>
       <hr class="my-4">
       <!-- Name input -->
       <div class="form-outline mb-4">
-        <input type="email" id="form3Example3" class="form-control form-control-lg" placeholder="Enter Your Name" />
+        <input type="text" id="form3Example3" class="form-control form-control-lg" name="name" placeholder="Enter Your Name" />
+      </div>
+
+      <!-- Username input -->
+      <div class="form-outline mb-4">
+        <input type="text" id="form3Example3" class="form-control form-control-lg" name="username" placeholder="Enter Your UserName" />
       </div>
 
       <!-- Email input -->
       <div class="form-outline mb-4">
-        <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Enter Email" />
+        <input type="email" id="form3Example4" class="form-control form-control-lg" name="email" placeholder="Enter Email" />
       </div>
 
       <!-- Password input -->
       <div class="form-outline mb-4">
-        <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Enter Password" />
+        <input type="password" id="form3Example4" class="form-control form-control-lg" name="password" placeholder="Enter Password" />
       </div>
 
       <!-- Repeat Password input -->
       <div class="form-outline mb-4">
-        <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Repeat Password" />
+        <input type="password" id="form3Example4" class="form-control form-control-lg" name="repeat_password" placeholder="Repeat Password" />
       </div>
 
       <div class="text-center text-lg-center mt-4 pt-2">
-        <button type="button" class="btn btn-primary btn-lg" style="margin: auto;">Submit</button>
+        <button type="submit" class="btn btn-primary btn-lg" style="margin: auto;">Submit</button>
         <hr class="my-4">
         <button type="button" class="btn btn-secondary btn-lg" style="margin: auto;background-color: #dd4b39;">Sign In
           with Google</button>
