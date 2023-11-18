@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html>
 
-<head>
-    <link rel="stylesheet" href="<!DOCTYPE html>
 <html>
 
 <head>
@@ -40,18 +37,20 @@
     <div class="availability-section">
         <h1 style="color: rgba(0, 60, 255, 0.667);">Check Cycle Availability</h1>
         <form id="availability-form" action="/availability" method="post">
-            <input type="text" id="cycle-code" placeholder="Enter Cycle Code" required>
+            <input type="text" id="cycle-code" name="id" placeholder="Enter Cycle Code" required>
             <button type="submit" id="check-button">Check Availability</button>
         </form>
+        <h3><%= locals.data %></h3>
 
-        <!-- <div class="availability-result" id="available-result">
-            <p style="color: rgba(0, 60, 255, 0.667);">Cycle is available!</p>
-            <button id="book-button" onclick="window.location.href = '/payment';">Book Now</button>
-        </div>
 
-        <div class="availability-result" id="unavailable-result">
-            <p style="color: rgba(0, 60, 255, 0.667);">Sorry, no rides are available with this code.</p>
-        </div> -->
+        <h2>Book Now!</h2>
+        <form action="/payment" method="post">
+            <input type="number" name="hours" placeholder="Enter Number of Hours">
+            <button type="submit">Book</button>
+
+        </form>
+
+        
     </div>
 
 </body>

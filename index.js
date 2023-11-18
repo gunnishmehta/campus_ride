@@ -8,6 +8,10 @@ const port = 3000;
 let loggedIn = false;
 let user_data=[];
 let name ='user';
+let availability = 'Enter code above to check availability';
+let hours = 0;
+let password = 'Password';
+let register_data = 'Make sure Both passwords match';
 
 const db = new pg.Client({
     user: "postgres",
@@ -26,27 +30,28 @@ app.get('/', (req,res)=>{
     res.render('home.ejs', {name:name});
 })
 app.get('/login', (req,res)=>{
-    res.render('login.ejs');
+    res.render('login.ejs', {data:password});
 })
 
 app.post('/login', async(req, res)=>{
-    const data = req.body;
+    const data = req.body;  
     
     const result = await db.query('select * from customers where email = $1', [data.email]);
     if(result.rows[0].password !== data.password){
-        console.log('mismatch');
-        // how to handle mistmatches
+        password = 'Incorrect password, please try again';
+        res.render('login.ejs', {data: password});
+    }else{
 
+        loggedIn = true;
+        
+        user_data = result.rows[0];
+        name = user_data.name;
+        res.redirect('/');
     }
-    loggedIn = true;
-
-    user_data = result.rows[0];
-    name = user_data.name;
-    res.redirect('/');
 });
 
 app.get('/register', (req,res)=>{
-    res.render('registercopy.ejs');
+    res.render('registercopy.ejs', {data: register_data});
 })
 
 app.post('/register', async(req, res)=>{
@@ -54,17 +59,28 @@ app.post('/register', async(req, res)=>{
     name = user_data.name;
 
     if(user_data.repeat_password !== user_data.password){
-        console.log('Password mismatch');
+        register_data = 'Passwords dont match, try again';
+        res.render('registercopy.ejs', {data: register_data});
+    }else{
+
+        loggedIn = true;
+        await db.query('insert into customers (name, username, password, email) values ($1, $2, $3, $4)', 
+        [user_data.name, user_data.username, user_data.password, user_data.email]);
+        
+        res.redirect('/');
     }
-    loggedIn = true;
-    await db.query('insert into customers (name, username, password, email) values ($1, $2, $3, $4)', 
-    [user_data.name, user_data.username, user_data.password, user_data.email]);
-    
-    res.redirect('/');
 });
 
 app.get('/payment', (req,res)=>{
-    res.render('payment.ejs');
+    if(loggedIn === true){
+        res.render('payment.ejs', {hour:hours});
+    }else{
+        res.render('login.ejs');
+    }
+})
+
+app.post('/payment', async(req, res)=>{
+    res.render('payment.ejs', {hour:hours});
 })
 
 app.get('/location', (req,res)=>{
@@ -86,7 +102,18 @@ app.get('/editprofile', (req,res)=>{
 })
 
 app.get('/availability', (req,res)=>{
-    res.render('availability.ejs');
+    res.render('availability.ejs', {data: availability});
+})
+
+app.post('/availability', async(req, res)=>{
+    const data = req.body.id;
+    const result = await db.query('select * from cycles where codes = $1', [data]);
+    if(result.rows.length === 0){
+        availability = 'Invalid code!'
+    }else{
+        availability = result.rows[0].availability;
+    }
+    res.render('availability.ejs', {data: availability});
 })
 
 
