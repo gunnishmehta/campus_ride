@@ -1,8 +1,11 @@
-import express from 'express';
-import bodyParser from "body-parser";
-import pg from "pg";
-
+const express = require("express");
 const app = express();
+
+const paymentRoute = require('./routes/paymentRoute');
+require('dotenv').config();
+const bodyParser = require("body-parser");
+const pg = require("pg");
+
 const port = 3000;
 
 let loggedIn = false;
@@ -26,6 +29,7 @@ db.connect();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/payment',paymentRoute);
 app.get('/', (req,res)=>{
     res.render('home.ejs', {name:name});
 })
@@ -124,4 +128,3 @@ app.get('/landing', (req,res)=>{
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
 });
-  

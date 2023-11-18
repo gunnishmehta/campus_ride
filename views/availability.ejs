@@ -40,23 +40,20 @@
             <input type="text" id="cycle-code" name="id" placeholder="Enter Cycle Code" required>
             <button type="submit" id="check-button">Check Availability</button>
         </form>
-        <h3><%= locals.data %></h3>
+        <h3>
+            <%= locals.data %>
+        </h3>
 
 
         <h2>Book Now!</h2>
-        <form action="/payment" method="post">
-            <input type="number" name="hours" placeholder="Enter Number of Hours">
-            <button type="submit">Book</button>
-
+        <form action="/payment">
+            <button type="submit">Book Now!</button>
         </form>
 
-        
     </div>
-
+    
 </body>
 
 
-
-</body>
 
 </html>
