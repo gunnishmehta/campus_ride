@@ -36,7 +36,7 @@ body {
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.9);
     width: 380px;
-    padding: 35px;
+    padding: 45px;
     border: 2px solid #eee;
     border-radius: 20px;
     color: #69707a;
@@ -109,7 +109,7 @@ body {
     text-align: center;
     margin: 100px auto;
     width: 50%;
-    height: 35%;
+    height: 45%;
     background-color: #58525283;
     padding: 20px;
     border-radius: 10px;

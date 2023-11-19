@@ -35,19 +35,21 @@
 
     <!-- Availability Check Section -->
     <div class="availability-section">
-        <h1 style="color: rgba(0, 60, 255, 0.667);">Check Cycle Availability</h1>
+        <h1 style="color: aqua;">Check Cycle Availability</h1>
+        <br>
         <form id="availability-form" action="/availability" method="post">
             <input type="text" id="cycle-code" name="id" placeholder="Enter Cycle Code" required>
             <button type="submit" id="check-button">Check Availability</button>
         </form>
-        <h3>
+        <br>
+        <h3 style="color: burlywood;">
             <%= locals.data %>
         </h3>
-
-
-        <h2>Book Now!</h2>
+        <h2 style="color: aqua;">Book Now!</h2>
+        <br>
         <form action="/payment">
             <button type="submit">Book Now!</button>
+            <br>
         </form>
 
     </div>

@@ -29,9 +29,9 @@ body {
 .image-container {
     display: flex;
     justify-content: center;
+    height: 80vh;
     align-items: center;
     text-align: center;
-    height: 10vh;
 }
 
 .btn-primary btn-lg {

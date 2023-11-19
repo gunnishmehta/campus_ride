@@ -18,50 +18,26 @@ body {
     background-color: #333;
     padding: 10px;
 }
-
-.payment-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
+/* Navbar and text styles */
+.text-body,
+.link-danger {
+    color: white;
 }
-
-.payment-options {
+.pay-form {
+    display: inline-block;
+    justify-content: center;
+    height: 70vh;
+    align-items: center;
     text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 150px;
+    transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.9);
-    padding: 30px;
+    width: 400px;
+    padding: 10px;
     border: 2px solid #eee;
     border-radius: 20px;
-    color: white;
-    margin: 10px;
-}
-
-.payment-options h2 {
-    margin-bottom: 30px;
-    padding: 5px;
-    font-size: 24px;
-}
-
-.payment-options ul {
-    list-style: none;
-    padding: 0;
-}
-
-.payment-options li {
-    margin: 50px 0;
-    font-size: 18px;
-}
-
-.payment-options a {
-    text-decoration: none;
-    color: white;
-    background: #25b636;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin: 20px;
-    /* Added margin for spacing */
-}
-
-.payment-options a:hover {
-    background: #acc9f7;
+    color: #69707a;
 }

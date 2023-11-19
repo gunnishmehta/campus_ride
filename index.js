@@ -82,6 +82,10 @@ app.post('/register', async(req, res)=>{
     }
 });
 
+app.post('/editprofile', (req, res) => {
+    res.redirect('/home');
+})
+
 app.get('/payment', (req,res)=>{
     if(loggedIn === true){
         res.render('payment.ejs', {hour:hours});
