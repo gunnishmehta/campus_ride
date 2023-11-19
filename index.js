@@ -31,10 +31,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/payment',paymentRoute);
 app.get('/', (req,res)=>{
-    res.render('home.ejs', {name:name});
+    res.render('landing.ejs');
 })
 app.get('/login', (req,res)=>{
     res.render('login.ejs', {data:password});
+})
+app.get('/home', (req,res)=>{
+    if(loggedIn === true){
+        res.render('home.ejs', {name:name});
+    }else{
+        res.redirect('/');
+    }
 })
 
 app.post('/login', async(req, res)=>{
@@ -50,7 +57,7 @@ app.post('/login', async(req, res)=>{
         
         user_data = result.rows[0];
         name = user_data.name;
-        res.redirect('/');
+        res.redirect('/home');
     }
 });
 
@@ -71,7 +78,7 @@ app.post('/register', async(req, res)=>{
         await db.query('insert into customers (name, username, password, email) values ($1, $2, $3, $4)', 
         [user_data.name, user_data.username, user_data.password, user_data.email]);
         
-        res.redirect('/');
+        res.redirect('/home');
     }
 });
 
