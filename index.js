@@ -37,7 +37,7 @@ app.get('/login', (req,res)=>{
     res.render('login.ejs', {data:password});
 })
 app.get('/home', (req,res)=>{
-    if(loggedIn === true){
+    if(loggedIn == true){
         res.render('home.ejs', {name:name});
     }else{
         res.redirect('/');
@@ -87,7 +87,7 @@ app.post('/editprofile', (req, res) => {
 })
 
 app.get('/payment', (req,res)=>{
-    if(loggedIn === true){
+    if(loggedIn == true){
         res.render('payment.ejs', {hour:hours});
     }else{
         res.render('login.ejs');
@@ -102,14 +102,14 @@ app.get('/location', (req,res)=>{
     res.render('location.ejs');
 })
 app.get('/resetpass', (req,res)=>{
-    if(loggedIn === true){
+    if(loggedIn == true){
         res.render('resetpass.ejs');
     }else{
         res.render('login.ejs');
     }
 })
 app.get('/editprofile', (req,res)=>{
-    if(loggedIn === true){
+    if(loggedIn == true){
         res.render('editprofile.ejs');
     }else{
         res.render('login.ejs');
@@ -136,6 +136,9 @@ app.get('/landing', (req,res)=>{
     res.render('landing.ejs');
 })
 
+app.get('/about', (req, res)=>{
+    res.render('about.ejs');
+})
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
 });
