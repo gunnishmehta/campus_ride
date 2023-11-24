@@ -7,39 +7,51 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<link rel="stylesheet" href="/styles/payment.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #333; padding: 10px;">
 		<a class="navbar-brand" href="/login" style="color: white; margin-left: 10px;">CampusRide</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-		  aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
+			aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-		  <ul class="navbar-nav ms-auto">
-			<li class="nav-item">
-			  <a class="nav-link" href="/home" style="color: white;">Home</a>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="/location" style="color: white;">Locations</a>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="/about" style="color: white;">About & Contact Us</a>
-			</li>
-		  </ul>
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="/home" style="color: white;">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/location" style="color: white;">Locations</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/about" style="color: white;">About & Contact Us</a>
+				</li>
+			</ul>
 		</div>
-	  </nav>
-	<div>
-	<form class="pay-form">
-		<h3 style="color: aqua; text-align: center; align-items: center; ;">Select the Number of Hours</h3>
+	</nav>
+
+	<div class="availability-section">
+		<h1 style="color: aqua;">Check Cycle Availability</h1>
 		<br>
-		<input type="number" placeholder="No. of hours"  name="amount">
-		<input type="submit" value="Pay Now">
-	</form>
-</div>
-	
+		<form id="availability-form" action="/payment" method="post">
+			<input type="text" id="cycle-code" name="id" placeholder="Enter Cycle Code" required>
+			<button type="submit" id="check-button">Check Availability</button>
+		</form>
+		<br>
+		<h3 style="color: burlywood;">
+			<%= locals.data %>
+		</h3>
+
+		<form class="pay-form">
+			<h3 style="color: aqua; text-align: center; align-items: center; ;">Select the Number of Hours</h3>
+			<br>
+			<input type="number" placeholder="No. of hours" name="amount">
+			<input type="submit" value="Pay Now">
+		</form>
+	</div>
+
 </body>
 
 </html>
@@ -48,55 +60,55 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 
-$(document).ready(function(){
-	$('.pay-form').submit(function(e){
-		e.preventDefault();
+	$(document).ready(function () {
+		$('.pay-form').submit(function (e) {
+			e.preventDefault();
 
-		var formData = $(this).serialize();
+			var formData = $(this).serialize();
 
-		$.ajax({
-			url:"/payment/createOrder",
-			type:"POST",
-			data: formData,
-			success:function(res){
-				if(res.success){
-					var options = {
-						"key": ""+res.key_id+"",
-						"amount": ""+res.amount+"",
-						"currency": "INR",
-						"name": ""+res.product_name+"",
-						"description": ""+res.description+"",
-						"image": "https://dummyimage.com/600x400/000/fff",
-						"order_id": ""+res.order_id+"",
-						"handler": function (response){
-							alert("Payment Succeeded");
-							// window.open("/","_self")
-						},
-						"prefill": {
-							"contact":""+res.contact+"",
-							"name": ""+res.name+"",
-							"email": ""+res.email+""
-						},
-						"notes" : {
-							"description":""+res.description+""
-						},
-						"theme": {
-							"color": "#2300a3"
-						}
-					};
-					var razorpayObject = new Razorpay(options);
-					razorpayObject.on('payment.failed', function (response){
+			$.ajax({
+				url: "/payment/createOrder",
+				type: "POST",
+				data: formData,
+				success: function (res) {
+					if (res.success) {
+						var options = {
+							"key": "" + res.key_id + "",
+							"amount": "" + res.amount + "",
+							"currency": "INR",
+							"name": "" + res.product_name + "",
+							"description": "" + res.description + "",
+							"image": "https://dummyimage.com/600x400/000/fff",
+							"order_id": "" + res.order_id + "",
+							"handler": function (response) {
+								alert("Payment Succeeded");
+								// window.open("/","_self")
+							},
+							"prefill": {
+								"contact": "" + res.contact + "",
+								"name": "" + res.name + "",
+								"email": "" + res.email + ""
+							},
+							"notes": {
+								"description": "" + res.description + ""
+							},
+							"theme": {
+								"color": "#2300a3"
+							}
+						};
+						var razorpayObject = new Razorpay(options);
+						razorpayObject.on('payment.failed', function (response) {
 							alert("Payment Failed");
-					});
-					razorpayObject.open();
+						});
+						razorpayObject.open();
+					}
+					else {
+						alert(res.msg);
+					}
 				}
-				else{
-					alert(res.msg);
-				}
-			}
-		})
+			})
 
+		});
 	});
-});
 
 </script>

@@ -84,8 +84,8 @@ app.get('/about', (req, res)=>{
     res.render('about.ejs');
 });
 
-app.get('/availability', (req,res)=>{
-    res.render('availability.ejs', {data: availability});
+app.get('/payment', (req,res)=>{
+    res.render('payment.ejs', {data: availability});
 });
 
 app.get('/editprofile', (req,res)=>{
@@ -110,14 +110,6 @@ app.get('/location', (req,res)=>{
 
 app.get('/login', (req,res)=>{
     res.render('login.ejs', {data:login_data});
-});
-
-app.get('/payment', (req,res)=>{
-    if(loggedIn == true){
-        res.render('payment.ejs', {hour:hours});
-    }else{
-        res.redirect('/login');
-    }
 });
 
 app.get('/register', (req,res)=>{
@@ -177,19 +169,14 @@ app.post('/register', async(req, res)=>{
 });
 
 app.post('/editprofile', async(req, res) => {
-    console.log(req.body);
-    //modify data
-    // await db.query('insert into customers (name, username, password, email) values ($1, $2, $3, $4)', 
-    //     [user_data.name, user_data.username, user_data.password, user_data.email]);
+    let data = req.body;
+    await db.query('update customers set name = $1, email = $2, password = $3 where username = $4', 
+        [data.name, data.email, data.password, user_data.username]);
 
-    res.redirect('/editprofile');
+    res.redirect('/home');
 })
 
 app.post('/payment', async(req, res)=>{
-    res.render('payment.ejs', {hour:hours});
-})
-
-app.post('/availability', async(req, res)=>{
     const data = req.body.id;
     const result = await db.query('select * from cycles where codes = $1', [data]);
     if(result.rows.length === 0){
@@ -197,7 +184,7 @@ app.post('/availability', async(req, res)=>{
     }else{
         availability = result.rows[0].availability;
     }
-    res.render('availability.ejs', {data: availability});
+    res.render('payment.ejs', {data: availability});
 })
 
 
