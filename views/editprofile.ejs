@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/" style="color: white;">Home</a>
+                    <a class="nav-link" href="/home" style="color: white;">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/location" style="color: white;">Locations</a>
@@ -64,38 +64,30 @@
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputUsername">Username (how your name will appear to
                                     other users on the site)</label>
-                                <input class="form-control" id="inputUsername" type="text"
-                                    placeholder="Enter your username" value="username">
+                                <p></p>
+                                <input class="form-control" id="inputUsername" type="text" name="username"
+                                    placeholder="Enter your username" value="<%= locals.username %>" disabled>
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
-                                <!-- Form Group (first name)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="inputFirstName">First name</label>
-                                    <input class="form-control" id="inputFirstName" type="text"
-                                        placeholder="Enter your first name" value="">
-                                </div>
-                                <!-- Form Group (last name)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="inputLastName">Last name</label>
-                                    <input class="form-control" id="inputLastName" type="text"
-                                        placeholder="Enter your last name" value="">
-                                </div>
+                                <label class="small mb-1" for="inputFirstName">Name</label>
+                                <input class="form-control" id="inputFirstName" type="text" name="name"
+                                    placeholder="Enter your first name" value="">
                             </div>
-                            <!-- Form Row        -->
+                            <!-- Form Row       
                             <div class="row gx-3 mb-3">
 
-                                <!-- Form Group (location)-->
+                            
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputLocation">Location</label>
-                                    <input class="form-control" id="inputLocation" type="text"
+                                    <input class="form-control" id="inputLocation" type="text" 
                                         placeholder="Enter your location" value="">
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- Form Group (email address)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                <input class="form-control" id="inputEmailAddress" type="email"
+                                <input class="form-control" id="inputEmailAddress" type="email" name="email"
                                     placeholder="Enter your email address" value="">
                             </div>
                             <!-- Form Row-->
@@ -103,7 +95,7 @@
                                 <!-- Form Group (phone number)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputPhone">Phone number</label>
-                                    <input class="form-control" id="inputPhone" type="tel"
+                                    <input class="form-control" id="inputPhone" type="tel" name="phone"
                                         placeholder="Enter your phone number" value="">
                                 </div>
                             </div>
@@ -117,15 +109,15 @@
     </div>
     <script>
 
-        document.getElementById('uploadBtn').addEventListener('click', function() {
+        document.getElementById('uploadBtn').addEventListener('click', function () {
             document.getElementById('fileInput').click();
         });
-        document.getElementById('fileInput').addEventListener('change', function() {
-            const file = this.files[0]; 
+        document.getElementById('fileInput').addEventListener('change', function () {
+            const file = this.files[0];
             if (file) {
                 if (file.type.startsWith('image/')) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         document.getElementById('profile-image').src = e.target.result;
                     };
                     reader.readAsDataURL(file);
@@ -134,7 +126,7 @@
                 }
             }
         });
-    </script> 
+    </script>
 </body>
 
 </html>

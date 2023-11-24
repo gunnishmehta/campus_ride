@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <link rel="stylesheet" type="text/css" href="/styles/Registercopy.css">
+  <link rel="stylesheet" type="text/css" href="/styles/register.css">
   <meta charset="UTF-8">
   <title>Log-In-Page</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -20,7 +20,7 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/" style="color: white;">Home</a>
+          <a class="nav-link" href="/home" style="color: white;">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/location" style="color: white;">Locations</a>
@@ -40,37 +40,37 @@
       <hr class="my-4">
       <!-- Name input -->
       <div class="form-outline mb-4">
-        <input type="text" id="form3Example3" class="form-control form-control-lg" name="name" placeholder="Enter Your Name" />
+        <input type="text" id="form3Example3" class="form-control form-control-lg"   required="required" name="name" placeholder="Enter Your Name"/>
       </div>
 
       <!-- Username input -->
       <div class="form-outline mb-4">
-        <input type="text" id="form3Example3" class="form-control form-control-lg" name="username" placeholder="Enter Your UserName" />
+        <input type="text" id="form3Example3" class="form-control form-control-lg"   required="required" name="username" placeholder="Enter Your UserName" />
       </div>
 
       <!-- Email input -->
       <div class="form-outline mb-4">
-        <input type="email" id="form3Example4" class="form-control form-control-lg" name="email" placeholder="Enter Email" />
+        <input type="email" id="form3Example4" class="form-control form-control-lg"   required="required" name="email" placeholder="Enter Email" />
       </div>
 
       <!-- Password input -->
       <div class="form-outline mb-4">
-        <input type="password" id="form3Example4" class="form-control form-control-lg" name="password" placeholder="Enter Password" />
+        <input type="password" id="form3Example4" class="form-control form-control-lg"   required="required" name="password" placeholder="Enter Password" />
       </div>
 
       <!-- Repeat Password input -->
       <div class="form-outline mb-4">
-        <input type="password" id="form3Example4" class="form-control form-control-lg" name="repeat_password" placeholder="Repeat Password" />
-        <%= locals.data %>
+        <input type="password" id="form3Example4" class="form-control form-control-lg"   required="required" name="repeat_password" placeholder="Repeat Password" />
       </div>
+      <%= locals.data %>
 
       <div class="text-center text-lg-center mt-2">
         <button type="submit" class="btn btn-primary btn-lg" style="margin: auto;">Submit</button>
         <hr class="my-3">
-        <button type="button" class="btn btn-secondary btn-lg" style="margin: auto;background-color: #dd4b39;">Sign In
-          with Google</button>
+        <a href="/auth/google" class="btn">Sign up with Google</a>
       </div>
     </form>
+    
   </div>
 </body>
 
