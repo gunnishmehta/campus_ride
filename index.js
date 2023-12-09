@@ -14,7 +14,6 @@ let loggedIn = false;
 let user_data=[];
 let name ='user';
 let availability = 'Enter code above to check availability';
-let hours = 0;
 let login_data = 'Password';
 let register_data = 'Make sure Both passwords match';
 
@@ -70,9 +69,16 @@ app.get('/auth/google/failure',isLoggedIn, (req, res)=>{
 });
 
 app.get('/auth/protected',isLoggedIn, (req, res)=>{
-    let name = req.user.displayName;
-    console.log(req.user);
-    res.send(`Hello ${name}`);
+
+    user_data.name = req.user.displayName;
+    user_data.email = req.user.email;
+    user_data.username = req.user.displayName;
+    user_data.password = '1234';
+    console.log(user_data);
+    
+    loggedIn = true;
+    res.redirect('/home');
+
 });
 
 app.use('/auth/logout', (req, res)=>{
@@ -109,11 +115,19 @@ app.get('/location', (req,res)=>{
 });
 
 app.get('/login', (req,res)=>{
-    res.render('login.ejs', {data:login_data});
+    if(loggedIn == true){
+        res.redirect('/home');
+    }else{
+        res.render('login.ejs', {data:login_data});
+    }
 });
 
 app.get('/register', (req,res)=>{
-    res.render('register.ejs', {data: register_data});
+    if(loggedIn == true){
+        res.redirect('/home');
+    }else{
+        res.render('register.ejs', {data: register_data});  
+    }
 });
 
 app.get('/resetpass', (req,res)=>{
