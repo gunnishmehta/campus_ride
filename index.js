@@ -12,10 +12,13 @@ const pg = require("pg");
 const port = 3000;
 let loggedIn = false;
 let user_data=[];
+let logout = 'Logout';
 let name ='user';
 let availability = 'Enter code above to check availability';
 let login_data = 'Password';
 let register_data = 'Make sure Both passwords match';
+// let payment_success = false;
+let cycle_code = '';
 
 function isLoggedIn(req, res, next){
     req.user ? next() : res.sendStatus(401);
@@ -44,13 +47,19 @@ db.connect();
 
 //app.use()
 app.use(express.static("public"));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/payment',paymentRoute);
 
 
 //app.get()
 app.get('/', (req,res)=>{
-    res.render('landing.ejs');
+    if(loggedIn == false){
+        logout = 'Login';
+    }else{
+        logout = 'Logout';
+    }
+    res.render('landing.ejs', {data: logout});
 });
 
 app.get('/auth/google',
@@ -69,29 +78,31 @@ app.get('/auth/google/failure',isLoggedIn, (req, res)=>{
 });
 
 app.get('/auth/protected',isLoggedIn, (req, res)=>{
-
-    user_data.name = req.user.displayName;
+    name = req.user.displayName;
+    user_data.name = name;
     user_data.email = req.user.email;
-    user_data.username = req.user.displayName;
+    user_data.username = name;
     user_data.password = '1234';
     console.log(user_data);
-    
+
     loggedIn = true;
     res.redirect('/home');
 
 });
 
-app.use('/auth/logout', (req, res)=>{
-    req.session.destroy();
-    res.send('See you again');
-});
-
 app.get('/about', (req, res)=>{
-    res.render('about.ejs');
+    if(loggedIn == false)   logout = 'Login';
+    else    logout = 'Logout';
+    res.render('about.ejs', {data: logout});
 });
 
 app.get('/payment', (req,res)=>{
-    res.render('payment.ejs', {data: availability});
+    
+    if(loggedIn == true){
+        res.render('payment.ejs', {data: availability});
+    }else{
+        res.redirect('/login');
+    }
 });
 
 app.get('/editprofile', (req,res)=>{
@@ -111,7 +122,9 @@ app.get('/home', (req,res)=>{
 });
 
 app.get('/location', (req,res)=>{
-    res.render('location.ejs');
+    if(loggedIn == false)   logout = 'Login';
+    else    logout = 'Logout';
+    res.render('location.ejs', {data: logout});
 });
 
 app.get('/login', (req,res)=>{
@@ -138,11 +151,15 @@ app.get('/resetpass', (req,res)=>{
     }
 });
 
-app.use('/auth/logout', (req, res)=>{
-    req.session.destroy();
-    res.send('See you again');
-});
-
+app.use('/auth/logout', async (req, res) => {
+    if(loggedIn == false){
+        res.redirect('/login');
+    }else{   
+        req.session.destroy();
+        loggedIn = false;
+        res.render('logout.ejs');
+    }
+    });
 
 // app.post()
 app.post('/login', async(req, res)=>{
@@ -191,18 +208,29 @@ app.post('/editprofile', async(req, res) => {
 })
 
 app.post('/payment', async(req, res)=>{
-    const data = req.body.id;
-    const result = await db.query('select * from cycles where codes = $1', [data]);
+    const location = req.body.location_selector;
+    const temp = true
+    const result = await db.query('SELECT * FROM cycles WHERE location = $1 AND availability = $2', [location, 1]);
+
     if(result.rows.length === 0){
-        availability = 'Invalid code!'
+        availability = 'No Cycles found!'
     }else{
-        availability = result.rows[0].availability;
+        availability = result.rows[0].codes;
+        cycle_code = result.rows[0].codes;
     }
     res.render('payment.ejs', {data: availability});
 })
 
+app.post('/payment/success', async(req, res)=>{
+    // payment_success = true;
+    const result = await db.query('UPDATE cycles SET availability = $1 where codes = $2', [0, cycle_code]);
+})
 
+  
 
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
 });
+
+
+// add a login / logout href in navbar and also make a return page to return cycles

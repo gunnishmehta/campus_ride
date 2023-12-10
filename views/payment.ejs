@@ -28,6 +28,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/about" style="color: white;">About & Contact Us</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/auth/logout" style="color: white;">Logout</a>
+				</li>
 			</ul>
 		</div>
 	</nav>
@@ -36,7 +39,14 @@
 		<h1 style="color: aqua;">Check Cycle Availability</h1>
 		<br>
 		<form id="availability-form" action="/payment" method="post">
-			<input type="text" id="cycle-code" name="id" placeholder="Enter Cycle Code" required>
+			<select name="location_selector">
+				<option value="">Select Location</option>
+				<option value="Tan">Tan</option>
+				<option value="Cos">Cos</option>
+				<option value="Main Gate">Main Gate</option>
+				<option value="G Block">G Block</option>
+			</select>
+
 			<button type="submit" id="check-button">Check Availability</button>
 		</form>
 		<br>
@@ -56,59 +66,5 @@
 
 </html>
 
-<!--Inside index.html -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-
-	$(document).ready(function () {
-		$('.pay-form').submit(function (e) {
-			e.preventDefault();
-
-			var formData = $(this).serialize();
-
-			$.ajax({
-				url: "/payment/createOrder",
-				type: "POST",
-				data: formData,
-				success: function (res) {
-					if (res.success) {
-						var options = {
-							"key": "" + res.key_id + "",
-							"amount": "" + res.amount + "",
-							"currency": "INR",
-							"name": "" + res.product_name + "",
-							"description": "" + res.description + "",
-							"image": "https://dummyimage.com/600x400/000/fff",
-							"order_id": "" + res.order_id + "",
-							"handler": function (response) {
-								alert("Payment Succeeded");
-								// window.open("/","_self")
-							},
-							"prefill": {
-								"contact": "" + res.contact + "",
-								"name": "" + res.name + "",
-								"email": "" + res.email + ""
-							},
-							"notes": {
-								"description": "" + res.description + ""
-							},
-							"theme": {
-								"color": "#2300a3"
-							}
-						};
-						var razorpayObject = new Razorpay(options);
-						razorpayObject.on('payment.failed', function (response) {
-							alert("Payment Failed");
-						});
-						razorpayObject.open();
-					}
-					else {
-						alert(res.msg);
-					}
-				}
-			})
-
-		});
-	});
-
-</script>
+<script src="/js/payment.js"></script>
