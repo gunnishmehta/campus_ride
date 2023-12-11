@@ -151,6 +151,15 @@ app.get('/resetpass', (req,res)=>{
     }
 });
 
+app.get('/return',(req,res)=>{
+    if(loggedIn == true){
+        res.render('return.ejs');
+    }else{
+        res.render('login.ejs');
+    }
+    
+})
+
 app.use('/auth/logout', async (req, res) => {
     if(loggedIn == false){
         res.redirect('/login');
@@ -222,8 +231,12 @@ app.post('/payment', async(req, res)=>{
 })
 
 app.post('/payment/success', async(req, res)=>{
-    // payment_success = true;
     const result = await db.query('UPDATE cycles SET availability = $1 where codes = $2', [0, cycle_code]);
+})
+
+app.post('/return', async(req, res)=>{
+    const result = await db.query('UPDATE cycles SET availability = $1 where codes = $2', [1, req.body.code]);
+    res.redirect('/home');
 })
 
   
@@ -232,5 +245,3 @@ app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
 });
 
-
-// add a login / logout href in navbar and also make a return page to return cycles

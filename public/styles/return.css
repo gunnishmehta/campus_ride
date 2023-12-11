@@ -1,0 +1,40 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url("/images/Group4453naa.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-color: #f2f6fc;
+    color: white;
+}
+
+.navbar {
+    background-color: #333;
+    padding: 10px;
+}
+/* Navbar and text styles */
+.text-body,
+.link-danger {
+    color: white;
+}
+
+.availability-section {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 200px auto;
+    width: 50%;
+    height: 25%;
+    background-color: #58525283;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(151, 163, 164, 0.623);
+}
