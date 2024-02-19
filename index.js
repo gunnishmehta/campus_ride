@@ -37,11 +37,11 @@ app.use(passport.session());
 
 //database initialization
 const db = new pg.Client({
-    user: process.env.USERNAME,
-    host: process.env.HOSTNAME,
+    user: "postgres",
+    host: "localhost",
     database: process.env.DATABASE,
     password: process.env.PASSWORD,
-    port: 5432,
+    port: 5433,
 });
 db.connect();
 
@@ -97,19 +97,27 @@ app.get('/about', (req, res)=>{
 });
 
 app.get('/payment', (req,res)=>{
-    res.render('payment.ejs', {data: availability});
+    if(loggedIn == true){
+        res.render('payment.ejs', {data: availability});
+    }else{
+        res.redirect('/login');
+    }
 });
 
 app.get('/editprofile', (req,res)=>{
-
+    if(loggedIn == true){
         res.render('editprofile.ejs', {username:user_data.username});
-    
+    }else{
+        res.redirect('/login');
+    }
 });
 
 app.get('/home', (req,res)=>{
-
+    if(loggedIn == true){
         res.render('home.ejs', {name:name});
-   
+    }else{
+        res.redirect('/login');
+    }
 });
 
 app.get('/location', (req,res)=>{
@@ -119,36 +127,46 @@ app.get('/location', (req,res)=>{
 });
 
 app.get('/login', (req,res)=>{
-
+    if(loggedIn == true){
+        res.redirect('/home');
+    }else{
         res.render('login.ejs', {data:login_data});
-
+    }
 });
 
 app.get('/register', (req,res)=>{
-
+    if(loggedIn == true){
+        res.redirect('/home');
+    }else{
         res.render('register.ejs', {data: register_data});  
-
+    }
 });
 
 app.get('/resetpass', (req,res)=>{
-
+    if(loggedIn == true){
         res.render('resetpass.ejs');
-   
+    }else{
+        res.render('login.ejs');
+    }
 });
 
 app.get('/return',(req,res)=>{
-
+    if(loggedIn == true){
         res.render('return.ejs');
-   
+    }else{
+        res.render('login.ejs');
+    }
     
 })
 
-app.use('/auth/logout', async (req, res) => {
-   
+app.get('/auth/logout', async (req, res) => {
+    if(loggedIn == false){
+        res.redirect('/login');
+    }else{   
         req.session.destroy();
         loggedIn = false;
         res.render('logout.ejs');
-
+    }
     });
 
 // app.post()
