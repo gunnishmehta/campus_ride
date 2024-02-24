@@ -60,6 +60,7 @@ Start the server
 ## Demo
 
 ![](https://github.com/darkmoon-6524/campus_ride/blob/main/Gif.gif)
+* [Video](https://github.com/darkmoon-6524/campus_ride/blob/main/Video.mp4)
 
 
 ## Contributing
