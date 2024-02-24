@@ -1,4 +1,9 @@
 
+# Campus Ride
+
+An E-cycle booking system for campus integrated with Google Signin Api and Razorpay Api.
+
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
@@ -19,11 +24,10 @@ To run this project, you will need to add the following environment variables to
 
 ## Tech Stack
 
-**Client:** EJS, Css
-
-**Server:** Node, Express
-
-**Databse:** Postgres Sql
+* [EJS](https://ejs.co/)
+* [Node](https://nodejs.org/en)
+* [Express](https://expressjs.com/)
+* [Postgres](https://www.postgresql.org/)
 
 
 ## Run Locally
@@ -51,4 +55,14 @@ Start the server
 ```bash
   npm run start
 ```
+
+
+## Demo
+
+![](https://github.com/darkmoon-6524/campus_ride/blob/main/Gif.gif)
+
+
+## Contributing
+
+Contributions are always welcome! Just raise an issue, we will discuss it.
 
