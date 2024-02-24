@@ -17,7 +17,6 @@ let name ='user';
 let availability = 'Enter code above to check availability';
 let login_data = 'Password';
 let register_data = 'Make sure Both passwords match';
-// let payment_success = false;
 let cycle_code = '';
 
 function isLoggedIn(req, res, next){
@@ -235,10 +234,8 @@ app.post('/payment/success', async(req, res)=>{
 
 app.post('/return', async(req, res)=>{
     const result = await db.query('UPDATE cycles SET availability = $1 where codes = $2', [1, req.body.code]);
-    res.redirect('/home');
+    res.redirect('/home')
 })
-
-  
 
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
