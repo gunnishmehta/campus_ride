@@ -35,15 +35,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //database initialization
-const db = new pg.Client({
-    user: "postgres",
-    host: "localhost",
-    database: process.env.DATABASE,
-    password: process.env.PASSWORD,
-    port: 5433,
-});
-db.connect();
-
+try {
+    const db = new pg.Client({
+        user: "postgres",
+        host: "localhost",
+        database: process.env.DATABASE,
+        password: process.env.PASSWORD,
+        port: 5433,
+    });
+    db.connect();
+} catch (error) {
+    console.log("error connecting to database")
+}
 //app.use()
 app.use(express.static("public"));
 app.use(bodyParser.json());
